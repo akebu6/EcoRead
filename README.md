@@ -19,7 +19,7 @@ Users can interact with our project by inputting their own text data or accessin
 
 ## How we Built it 🏠
 ---
-To build this project, we used a combination of programming languages and tools. We utilized Python for data preprocessing, natural language processing, and machine learning algorithms. Libraries such as NLTK, spaCy, and scikit-learn were used for text analysis tasks. We also employed web scraping techniques to gather data from various sources. The project also utilises Streamlit, an open-source Python library to create the UI for the project.
+To build this project, we used a combination of programming languages and tools. We utilized Python for data preprocessing, natural language processing, and machine learning algorithms. Libraries such as NLTK, pandas, and matplotlib were used for text analysis tasks. We also employed web scraping techniques to gather data from various sources. The project also utilises Streamlit, an open-source Python library to create the UI for the project.
 
 ## Design
 ---
