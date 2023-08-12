@@ -5,7 +5,11 @@ Uncover the hidden insights in climate change-related text data to better unders
 ---
 Climate Change is a prevailing topic in today's world, everyone is concerned about it and don't know what information to trust as the internet has now become a vast place where anyone can share their own opinion would take it as gospel truth. For this reason, the team decided to create EcoRead, a place where users can search information about climate change.
 
-The increasing urgency of climate change and its potential consequences have motivated us to undertake this project. We believe that by analyzing text data related to climate change, we can gain valuable insights that can help address the issue more effectively.
+The increasing urgency of climate change and its potential consequences have motivated us to undertake this project. We believe that by analyzing text data related to climate change, we can gain valuable insights that can help address the issue more effectively. 
+
+The project greatly contributes to environmental sustanability in the following ways:
+1. **Accessible Information:** Climate change is a critical global issue, and understanding its complexities is essential for informed decision-making and action. By providing summarized and sentiment-analysed content, this tool enables users to quickly grasp the key points and sentiment of climate change-related texts. This promotes awareness and empowers individuals to engage in environmentally sustainable practices and advocacy.
+2. **Efficient Information Consumption:** The tool's summarization feature allows users to efficiently consume relevant information without spending excessive time reading lengthy articles. This efficiency can be particularly valuable during time-sensitive events like climate-related emergencies or policy updates, enabling users to stay informed and take appropriate actions promptly.
 
 # What it Does?
 
