@@ -23,7 +23,17 @@ To build this project, we used a combination of programming languages and tools.
 
 ## Design
 ---
+We were heavily inspired by the revised version of Double Diamond design process, which not only includes visual design, but a full-fledged research cycle in which you must discover and define your problem before tackling your solution & then finally deploy it.
+
+<img src="https://res.cloudinary.com/devpost/image/fetch/s--RDG-HzfY--/c_limit,f_auto,fl_lossy,q_auto:eco,w_900/https://assets.website-files.com/5e2ae40d598c476b087ac0cb/5e4541d9b89a7d396a6d6d36_Process%2520Focus2_1%25402x.png" />
+
+> 1. Discover: a deep dive into the problem we are trying to solve.
+> 2. Define: synthesizing the information from the discovery phase into a problem definition.
+> 3. Develop: think up solutions to the problem.
+> 4. Deliver: pick the best solution and build that.
+
 The following images are how the app looks like:
+
 <img width="1439" alt="Home" src="https://github.com/akebu6/EcoRead/assets/74776297/e312250a-c1d2-42ed-85d1-97693dde9c7f">
 
 <img width="850" alt="Text Complexity Analysis" src="https://github.com/akebu6/EcoRead/assets/74776297/00e4af88-6268-4304-b784-5df94fd46bfc">
