@@ -119,7 +119,6 @@ if selected == 'Text Complexity Analysis':
         if len(string_data) > 10000:
             st.error('Please upload a file of maximum 10,000 characters')
         else:
-            nltk.download('punkt')
             rt = readtime.of_text(string_data)
             tc = textstat.flesch_reading_ease(string_data)
             tokenized_words = word_tokenize(string_data)
