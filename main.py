@@ -20,7 +20,7 @@ from streamlit_option_menu import option_menu
 # Navbar
 selected = option_menu (
     menu_title = None,
-    options = ['URL Analysis', 'Text File Analysis', 'Dataset Analysis'],
+    options = ['URL Analysis', 'Text Complexity Analysis', 'Dataset Analysis'],
     icons = ['link-45deg', 'file-text', 'bar-chart-line'],  
     menu_icon = 'cast',
     default_index = 0,
