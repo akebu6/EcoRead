@@ -43,3 +43,4 @@ By providing users to summarise articles, upload their own files as well as prov
 
 ## What's Next for EcoRead ❓
 ---
+Continue developing the application because I want to implement this in our lives!
