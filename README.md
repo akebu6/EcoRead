@@ -28,7 +28,7 @@ To build this project, we used a combination of programming languages and tools.
 ---
 The team developed both personal and professional growth:
 1. **Technical Skills:** We developed and enhanced our expertise and obtained new skills ranging from ML/AI and
-2. **Research Skills:** The team had to researchba lot on the topic as well as learn new Python libraries that were used for this project.
+2. **Research Skills:** The team had to research a lot on the topic as well as learn new Python libraries that were used for this project.
 
 ## Challenges we ran into 😦
 ---
