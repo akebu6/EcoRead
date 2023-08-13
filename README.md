@@ -37,9 +37,9 @@ Developing the application was complex as the was a one person team. I had to do
 ## Insights 🤓
 ---
 By providing users to summarise articles, upload their own files as well as provide them with a visual representation of how climate change affects people's emotions online, users can make informed-decisions with regards to climate change.
-1. Sentiment Analysis & Complexity: provide an analysis of the sentiment of text as well as the complexity of text provided.
-2. Graph Visualisation: visual representation of sentiment analysis.
-3. Text Summarisation: users can summarise text from articles for quicker information absorption.
+1. **Sentiment Analysis & Complexity:** provide an analysis of the sentiment of text as well as the complexity of text provided.
+2. **Graph Visualisation:** visual representation of sentiment analysis.
+3. **Text Summarisation:** users can summarise text from articles for quicker information absorption.
 
 ## What's Next for EcoRead ❓
 ---
