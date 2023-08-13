@@ -110,7 +110,7 @@ if selected == "URL Analysis":
 
 
 # Uploading a text file
-if selected == 'Text File Analysis':
+if selected == 'Text Complexity Analysis':
     file = st.file_uploader('Upload your file here', type=['txt'])
     if file is not None:    
         time.sleep(2)
