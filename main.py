@@ -1,18 +1,20 @@
 import streamlit as st
-import requests
 import nltk
+import requests
 import pandas as pd
-from io import StringIO
-import readtime
+from bs4 import BeautifulSoup
+
 import time
+import readtime
 import textstat
-from nltk import sent_tokenize, word_tokenize, FreqDist
+from io import StringIO
+import heapq
+
+from nltk import sent_tokenize, word_tokenize
+from nltk.probability import FreqDist
 from nltk.corpus import stopwords
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-# from sumy.parsers.plaintext import PlaintextParser
-# from sumy.nlp.tokenizers import Tokenizer
-# from sumy.summarizers.lex_rank import LexRankSummarizer
-import matplotlib.pyplot as plt
+
+import plotly.express as px
 from streamlit_option_menu import option_menu
 
 # Navbar
@@ -44,7 +46,7 @@ st.sidebar.write("---")
  
 st.sidebar.markdown(
     """
-    EcoRead allows you to analyse the sentiment of an article by providing a URL, or by uploading a text file or by using the pre-existing dataset about climate change.
+    EcoRead allows you to analyse the sentiment of a pre-existing dataset, summarise the contents of an article for quicker information digestion as we well as analyse the complexity of a text.
     """
 )
 st.sidebar.divider()
@@ -65,29 +67,32 @@ expander.write(
     "I'd love your feedback :smiley: Want to collaborate? Develop a project? Find me on [LinkedIn](https://www.linkedin.com/in/akebu-simasiku-24186720a/) and [Twitter](https://twitter.com/akebu)"
 )
 
-# Function to extract text from a URL
+# Function to extract text content from a URL
 def extract_text_from_url(url):
     response = requests.get(url)
-    return response.text
+    soup = BeautifulSoup(response.text, 'html.parser')
+    paragraphs = soup.find_all('p')  # Adjust this based on the HTML structure
+    text = ' '.join([para.get_text() for para in paragraphs])
+    return text
 
-# Function to tokenize text and identify keywords
-def identify_keywords(text):
-    words = word_tokenize(text)
-    words = [word.lower() for word in words if word.isalnum()]
-    words = [word for word in words if word not in stopwords.words('english')]
-    freq_dist = FreqDist(words)
-    return freq_dist.most_common(10)  # Return top 10 keywords
-
-def summarize_text(text):
+# Function to generate a summarized version of the text
+def generate_summary(text, num_sentences=3):
     sentences = sent_tokenize(text)
-    return ' '.join(sentences[:3])  # Return the first 3 sentences as a summary
-
-# Function to analyze sentiment
-def analyze_sentiment(text):
-    sia = SentimentIntensityAnalyzer()
-    sentiment_scores = sia.polarity_scores(text)
-    sentiment = 'positive' if sentiment_scores['compound'] > 0 else 'negative' if sentiment_scores['compound'] < 0 else 'neutral'
-    return sentiment
+    words = [word for word in text.split() if word.lower() not in stopwords.words('english')]
+    word_freq = FreqDist(words)
+    ranking = {}
+    
+    for i, sentence in enumerate(sentences):
+        for word, freq in word_freq.items():
+            if word in sentence.lower():
+                if i not in ranking:
+                    ranking[i] = freq
+                else:
+                    ranking[i] += freq
+                    
+    selected_sentences = heapq.nlargest(num_sentences, ranking, key=ranking.get)
+    summary = [sentences[i] for i in sorted(selected_sentences)]
+    return ' '.join(summary)
 
 
 # User Interaction
@@ -95,57 +100,69 @@ if selected == "URL Analysis":
     url = st.text_input("Enter the URL of the climate change article and press Enter or Return: 👇 ",  placeholder="Enter a valid URL")
 
     if st.button('Search'):
-        text = extract_text_from_url(url)
-        keywords = identify_keywords(text)
-        summary = summarize_text(text)
-        sentiment = analyze_sentiment(text)
-        st.write("\nKeywords:", [keyword for keyword, _ in keywords])
-        st.write("Summary:", summary)
-        st.write("Sentiment:", sentiment)
-        
-        # graph visualization
-        # Graph Visualization
-        plt.bar(*zip(*keywords))
-        plt.xlabel('Keywords')
-        plt.ylabel('Frequency')
-        plt.title('Top Keywords in the Article')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
-        plt.show()
+        with st.spinner('Processing...'):
+            time.sleep(2)
+            text = extract_text_from_url(url)
+            summary = generate_summary(text)
+            
+            st.write("\nSummary:")
+            st.write(summary)
+
 
 # Uploading a text file
 if selected == 'Text File Analysis':
-        file = st.file_uploader('Upload your file here',type=['txt'])
-        if file is not None:
-            with st.spinner('Processing...'):
-                    time.sleep(2)
-                    stringio = StringIO(file.getvalue().decode("utf-8"))
-                    string_data = stringio.read()
-                    if len(string_data) > 10000:
-                        st.error('Please upload a file of maximum 10,000 characters')
-                    else:
-                        nltk.download('punkt')
-                        rt = readtime.of_text(string_data)
-                        tc = textstat.flesch_reading_ease(string_data)
-                        tokenized_words = word_tokenize(string_data)
-                        lr = len(set(tokenized_words)) / len(tokenized_words)
-                        lr = round(lr,2)
-                        n_s = textstat.sentence_count(string_data)
-                        st.markdown('___')
-                        st.text('Reading Time')
-                        st.write(rt)
-                        st.markdown('___')
-                        st.text('Text Complexity: from 0 or negative (hard to read), to 100 or more (easy to read)')
-                        st.write(tc)
-                        st.markdown('___')
-                        st.text('Lexical Richness (distinct words over total number of words)')
-                        st.write(lr)
-                        st.markdown('___')
-                        st.text('Number of sentences')
-                        st.write(n_s)
-                        st.balloons()
+    file = st.file_uploader('Upload your file here', type=['txt'])
+    if file is not None:    
+        time.sleep(2)
+        stringio = StringIO(file.getvalue().decode("utf-8"))
+        string_data = stringio.read()
+        if len(string_data) > 10000:
+            st.error('Please upload a file of maximum 10,000 characters')
+        else:
+            nltk.download('punkt')
+            rt = readtime.of_text(string_data)
+            tc = textstat.flesch_reading_ease(string_data)
+            tokenized_words = word_tokenize(string_data)
+            lr = len(set(tokenized_words)) / len(tokenized_words)
+            lr = round(lr,2)
+            n_s = textstat.sentence_count(string_data)
+            st.markdown('___')
+            st.text('Reading Time')
+            st.write(rt)
+            st.markdown('___')
+            st.text('Text Complexity: from 0 or negative (hard to read), to 100 or more (easy to read)')
+            st.write(tc)
+            st.markdown('___')
+            st.text('Lexical Richness (distinct words over total number of words)')
+            st.write(lr)
+            st.markdown('___')
+            st.text('Number of sentences')
+            st.write(n_s)
+            # st.balloons()   
+             
                         
-# Dataset Analysis
+# Dataset Analysiso plot the data
 if selected == "Dataset Analysis":
-    df = pd.read_csv()
+    PATH = "./csv_files/"
+    DATA = "twitter_sentiment_data.csv"
+    data = pd.read_csv(PATH + DATA)
     
+    # set up label dataframe for future refrences
+
+    label = [-1, 0, 1, 2]
+    labelN = ["Anti", "Neutral", "Pro", "News"]
+    labelDesc = [
+        "the tweet does not believe in man-made climate change"
+        , "the tweet neither supports nor refutes the belief of man-made climate change"
+        , "the tweet supports the belief of man-made climate change"
+        , "the tweet links to factual news about climate change"
+    ]
+
+    labelDf = pd.DataFrame(list(zip(label, labelN, labelDesc)), columns=["label", "name", "description"])
+    
+    fig = px.pie(data.sentiment.value_counts().values, 
+                 data.sentiment.value_counts().index, title='Sentiment Distribution of the Tweet Dataset')
+
+    
+    st.plotly_chart(fig)
+     

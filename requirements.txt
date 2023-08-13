@@ -1,0 +1,9 @@
+beautifulsoup4==4.11.2
+nltk==3.8.1
+pandas==2.0.3
+plotly==5.16.0
+readtime==3.0.0
+Requests==2.31.0
+streamlit==1.25.0
+streamlit_option_menu==0.3.6
+textstat==0.7.3
