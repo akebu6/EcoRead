@@ -23,6 +23,13 @@ To build this project, we used a combination of programming languages and tools.
 
 ## Design
 ---
+The following images are how the app looks like:
+<img width="1439" alt="Home" src="https://github.com/akebu6/EcoRead/assets/74776297/e312250a-c1d2-42ed-85d1-97693dde9c7f">
+
+<img width="850" alt="Text Complexity Analysis" src="https://github.com/akebu6/EcoRead/assets/74776297/00e4af88-6268-4304-b784-5df94fd46bfc">
+
+<img width="850" alt="Interactive Pie Chart" src="https://github.com/akebu6/EcoRead/assets/74776297/aab22e80-5757-45c5-8adb-969d5e6edc4a">
+
 
 ## Accomplishments 💪🏻
 ---
@@ -43,4 +50,4 @@ By providing users to summarise articles, upload their own files as well as prov
 
 ## What's Next for EcoRead ❓
 ---
-Continue developing the application because I want to implement this in our lives!
+Continue developing the application because I want to implement this in our lives! The other thing is to implement the featrures not implemented and work more on the summariser for better results as well as allow users to create their own charts from data that they insert.
