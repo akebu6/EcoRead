@@ -1,3 +1,5 @@
+![EcoRead Banner](https://github.com/akebu6/EcoRead/assets/74776297/6da1de67-c2f3-40d3-a6e0-fb2efd2bddcb)
+
 # EcoRead
 Uncover the hidden insights in climate change-related text data to better understand the impact and take informed actions.
 
